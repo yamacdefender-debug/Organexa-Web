@@ -46,7 +46,7 @@ Lighthouse skoru saha Core Web Vitals ölçümü veya tam WCAG denetimi değildi
 
 ## Hesap / ürün sahibinde kalan yayın işleri
 
-- [ ] Gerçek public destek e-postasını belirle, config ve statik fallback metnini güncelle; privacy’deki bekleme cümlesini kaldır.
+- [x] Public destek e-postası `izzetors42@gmail.com` olarak config, statik iletişim sayfası, privacy ve terms içinde tamamlandı.
 - [ ] Mobil uygulamadaki izinler, token hariç tutma, silme ve restore davranışlarını politika metniyle karşılaştır.
 - [ ] Search Console domain property için hesap özelinde DNS TXT doğrulaması yap.
 - [ ] Sitemap gönder, ana sayfa ve önemli landing URL’leri için URL Inspection yap; uygun sayfalarda indexing iste.

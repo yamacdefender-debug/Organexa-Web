@@ -47,8 +47,9 @@ Güncel adımlar: [GitHub özel alan adı dokümanı](https://docs.github.com/en
 | Privacy Policy | https://organexa.com.tr/privacy/ |
 | Terms of Service | https://organexa.com.tr/terms/ |
 | Authorized domain | organexa.com.tr |
+| Public support / developer contact | izzetors42@gmail.com |
 
-Alan adı sahipliğini Google’ın istediği yöntemle doğrulayın. Support email ve developer contact alanlarına gerçek, izlenen adresler girin. Redirect URI ve istemci türünü gerçek mobil uygulama yapılandırmasına göre tanımlayın; bu statik site OAuth callback uygulamaz. Homepage ve Privacy Policy oturum açmadan HTTPS ile erişilebilir olmalıdır.
+Alan adı sahipliğini Google’ın istediği yöntemle doğrulayın. Support email ve developer contact alanlarında `izzetors42@gmail.com` adresini kullanın; Google Cloud konsolundaki alanların kaydedilmesi hesap sahibi tarafından ayrıca yapılmalıdır. Redirect URI ve istemci türünü gerçek mobil uygulama yapılandırmasına göre tanımlayın; bu statik site OAuth callback uygulamaz. Homepage ve Privacy Policy oturum açmadan HTTPS ile erişilebilir olmalıdır.
 
 Google Drive izni: `https://www.googleapis.com/auth/drive.appdata`. Sign-In için temel kimlik, e-posta ve görünen ad açıklanır. Web sitesi kendisi Google oturumu veya Drive erişimi başlatmaz.
 
@@ -61,10 +62,10 @@ Kaynak: [Google API Services User Data Policy](https://developers.google.com/ter
 `assets/config.js` içindeki tek ayarı değiştirin:
 
 ```js
-window.ORGANEXA_CONFIG = Object.freeze({ supportEmail: "" });
+window.ORGANEXA_CONFIG = Object.freeze({ supportEmail: "izzetors42@gmail.com" });
 ```
 
-Gerçek adres kesinleşene kadar boş bırakın. Boşken iletişim sayfası adresin henüz yayımlanmadığını belirtir; sahte adres gösterilmez. Geçerli adres girildiğinde güvenli DOM metni ve `mailto:` bağlantısı oluşturulur. JavaScript kapalıyken de adresi göstermek için `contact/index.html` içindeki `data-support` paragrafını aynı adresle güncelleyin. Adres yayımlandığında `privacy/index.html` içindeki henüz yayımlanmadığına ilişkin cümleyi de güncelleyin. Config içine gizli anahtar/token koymayın; tüm dosyalar herkese açıktır.
+Public adres `izzetors42@gmail.com` olarak ayarlanmıştır. JavaScript yalnız `[data-support-email]` bağlantılarının adresini günceller; CTA metnini korur. Bağlantılar statik HTML içinde de bulunduğundan JavaScript kapalıyken e-posta ve buton çalışır. Adres değişirse config ile birlikte `contact/index.html`, `privacy/index.html`, `terms/index.html` içindeki mailto/görünen adresleri, OAuth bilgilerini ve ilgili belgeleri güncelleyin. Config içine gizli anahtar veya token koymayın; tüm dosyalar herkese açıktır. Site mevcut dark/gold tasarımını sistemin açık ve koyu renk tercihlerinde korur; ayrı bir açık tema anahtarı yoktur.
 
 ## Yapı ve tasarım
 

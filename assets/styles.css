@@ -52,3 +52,7 @@ h1,h2,h3{overflow-wrap:anywhere}
 /* Set the collapsed state before JS runs, preventing mobile navigation reflow.
    A noscript stylesheet keeps navigation available when JavaScript is disabled. */
 @media(max-width:760px){.site-header nav{display:none}.site-header nav.is-open{display:flex}}
+/* Contact links stay usable without JavaScript and on narrow screens. */
+.contact-details p+p{margin-top:10px}
+.contact-details .contact-email{margin-top:24px;min-height:48px;max-width:100%}
+.contact-card>div{min-width:0}

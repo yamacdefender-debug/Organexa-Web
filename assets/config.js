@@ -1,2 +1,2 @@
-// Public support email. Leave empty until a real address is confirmed.
-window.ORGANEXA_CONFIG = Object.freeze({ supportEmail: "" });
+// Public contact address. Keep static HTML fallbacks in sync (see README).
+window.ORGANEXA_CONFIG = Object.freeze({ supportEmail: "izzetors42@gmail.com" });

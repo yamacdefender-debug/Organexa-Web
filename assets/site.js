@@ -17,11 +17,10 @@
   mobile.addEventListener('change', close);
   const email = window.ORGANEXA_CONFIG?.supportEmail?.trim();
   if (email && /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email)) {
-    document.querySelectorAll('[data-support]').forEach(element => {
-      const link = document.createElement('a');
-      link.href = 'mailto:' + encodeURIComponent(email);
-      link.textContent = email;
-      element.replaceChildren(link);
+    document.querySelectorAll('[data-support-email]').forEach(link => {
+      link.href = 'mailto:' + email;
+      // Keep the CTA label and icon; update only links displaying the address.
+      if (!link.classList.contains('button')) link.textContent = email;
     });
   }
 })();

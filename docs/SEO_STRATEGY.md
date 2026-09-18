@@ -18,7 +18,7 @@ Her sayfanın primary keyword, başlık, H1, canonical ve bağlantıları [anaht
 
 Ürün anlatımı sahibinin verdiği kapsamla sınırlıdır. Mobil uygulama kodu bu repoda değildir. Yayından önce gerçek sürümle karşılaştırılması gerekenler: Google izinleri, yedeklerden hariç tutulan tokenlar, silme/restore davranışı, WhatsApp akışı ve platform kullanılabilirliği. Android/iOS ürün hedefi hem görünür içerikte hem schema içinde yer alır; mağazada yayımlanma iddiası yoktur. Otomatik mesaj, banka entegrasyonu, anlık senkronizasyon, ekip yetkilendirmesi veya şifreleme türü uydurulmaz.
 
-Organexa bir ürün/marka olarak Organization ile tanımlanır; bir şirket türü, tüzel unvan veya adres uydurulmaz. Geliştirici İzzet ÖRS görünür ve tutarlıdır. Gerçek destek adresi kesinleşene kadar config boş kalır. Bu eksiklik OAuth başvurusu öncesinde giderilmelidir.
+Organexa bir ürün/marka olarak Organization ile tanımlanır; bir şirket türü, tüzel unvan veya adres uydurulmaz. Geliştirici İzzet ÖRS görünür ve tutarlıdır. Public destek adresi `izzetors42@gmail.com`; iletişim, gizlilik ve kullanım koşullarında aynı adres kullanılır. OAuth konsolundaki support/developer contact alanları da bu adresle eşleştirilmelidir.
 
 ## Structured data
 
