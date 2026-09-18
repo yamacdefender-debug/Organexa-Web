@@ -20,7 +20,7 @@ Tarayıcıda http://localhost:8000 adresini açın. Kökten başlayan bağlantı
 4. DNS doğrulaması ve sertifika tamamlanınca **Enforce HTTPS** seçeneğini etkinleştirin.
 5. HTTPS üzerinden ana sayfa, politika, koşullar, iletişim ve bilinmeyen bir adresin 404 sayfasını kontrol edin.
 
-`.nojekyll` doğrudan statik yayını sağlar. Workflow veya build server gerekmez. Bu repo özel alan adı kökü için hazırlanmıştır; `/Organexa-Web/` proje alt yolundaki önizleme hedeflenmez. Pages etkinleştirme ve DNS işlemleri ayrıca yapılmalıdır.
+`.nojekyll` doğrudan statik yayını sağlar. Workflow veya build server gerekmez. Bu repo özel alan adı kökü için hazırlanmıştır; `/Organexa-Web/` proje alt yolundaki önizleme hedeflenmez. 18 Eylül 2026 kontrolünde Pages yayını ve alan adı aktif, sertifika onaylıdır. Bu milestone sırasında Enforce HTTPS etkinleştirilmiştir. Yukarıdaki adımlar yeniden kurulum içindir.
 
 ## Özel alan adı ve DNS
 
@@ -94,3 +94,50 @@ Harici font, izleme, çerez, kütüphane veya üçüncü taraf istemci isteği y
 - JavaScript kapalıyken metinlerin, alt menünün ve ana gezinmenin çalıştığını kontrol edin.
 - Tüm canonical / Open Graph adresleri ve sitemap üretim alan adını kullanır.
 - Politikalar hukuki danışmanlık değildir; gerçek ürün ve veri akışı değiştikçe güncellenmelidir.
+## SEO mimarisi ve bakım
+
+Bu milestone ile dokuz yeni içerik sayfası eklenmiştir:
+
+- `/features/`
+- `/for-pianists/`, `/for-djs/`, `/for-event-companies/`
+- `/event-management/`, `/customer-management/`, `/payment-tracking/`
+- `/whatsapp-reminders/`, `/backup-and-restore/`
+
+Tüm içerik statik HTML’dir; derleme adımı gerektirmez. Yeni sayfa veya içerik düzenlerken HTML’yi doğrudan güncelleyin. Title, description, OG/Twitter metinleri ve WebPage JSON-LD birbirleriyle tutarlı olmalı; FAQ değişirse görünür cevap ve FAQPage JSON-LD birlikte değişmelidir. Breadcrumb HTML ve BreadcrumbList eşleşmelidir. Yeni URL’yi sitemap ve anahtar kelime haritasına ekleyip en az bir bağlamsal iç bağlantı verin. Gizli `.qa/` çalışma çıktıları git tarafından dışlanır ve yayımlanmaz.
+
+```sh
+python tools/seo_audit.py
+```
+
+Standart kütüphane dışında Python bağımlılığı yoktur. Betik repo kökünü kendisi bulur; isteğe bağlı site kökü argümanı alır. H1, metadata, canonical, OG, Twitter, HTML tag dengesi, heading sırası, alt/boyutlar, iç bağlantı/anchor, erişilebilir sayfa grafiği, JSON-LD, görünür FAQ/breadcrumb eşleşmesi, sitemap ve robots kontrollerinde kritik hata varsa sıfırdan farklı çıkış kodu döndürür. Harici sitelerin kullanılabilirliğini, sunucu HTTP başlıklarını veya Google indeksini denetlemez.
+
+Belgeler:
+
+- [SEO stratejisi](docs/SEO_STRATEGY.md)
+- [Anahtar kelime haritası](docs/SEO_KEYWORD_MAP.md)
+- [Search Console ve Bing kurulumu](docs/SEARCH_CONSOLE_SETUP.md)
+- [Yayın kontrol listesi ve ölçümler](docs/SEO_RELEASE_CHECKLIST.md)
+- [Gelecek içerik planı](docs/SEO_CONTENT_ROADMAP.md)
+
+## Canonical, yönlendirmeler ve 404
+
+Tek host `https://organexa.com.tr`; dizin sayfalarında son `/` kullanılır. Canonical etiketi yönlendirme değildir. GitHub Pages’te Custom domain bu apex ad olmalı; `www` DNS CNAME kaydı `yamacdefender-debug.github.io` adresine yönelmeli. GitHub Pages apex/www yönlendirmesini DNS doğruysa sağlar. Enforce HTTPS ayrıca etkinleştirilmelidir. Üretimde `http`, `https`, `www`, slash’sız ve `/index.html` URL’lerini kontrol edin; tüm eşdeğer adresler tercih edilen sürüme yönlenmeli veya self-canonical ile aynı içeriğin tercih edilen dizin sürümünü belirtmelidir. `/index.html` için özel 301 kuralı gerekiyorsa Pages’in önünde yönlendirme destekleyen bir katman gerekir; JS yönlendirmesi eklenmemiştir.
+
+Bilinmeyen URL gerçek HTTP **404** döndürmelidir. SPA fallback kullanılmaz. Kökteki `404.html` markalı hata sayfasıdır, noindex taşır ve sitemap’e dahil değildir. `python -m http.server` bilinmeyen yolda kendi standart 404 yanıtını verir; tasarımı yerelde `/404.html` ile, üretim 404 davranışını bilinmeyen bir yol ile kontrol edin.
+
+## Güvenlik başlıkları ve GitHub Pages sınırları
+
+GitHub Pages statik deposundan özel HTTP yanıt başlıkları tanımlanamaz. `_headers`, `.htaccess` veya HTML `http-equiv` ile aşağıdaki başlıkları etkinmiş gibi göstermeyin. Başlıkların çoğu için yapılandırılabilir CDN/reverse proxy veya başka bir barındırma katmanı gerekir; bu milestone böyle bir katman kurmaz.
+
+| Politika | Mevcut durum / uygulanacak yer |
+| --- | --- |
+| Referrer-Policy | Her HTML’de `meta name="referrer" content="strict-origin-when-cross-origin"` var. Yanıt başlığı sunucu/CDN üzerinden ayrıca uygulanabilir. |
+| Content-Security-Policy | Zorunlu bir CSP şu anda uygulanmıyor. Önce tüm sayfaları ve JSON-LD’yi test ederek sunucu/CDN’de Report-Only ile başlayın; ardından dar bir allowlist uygulayın. |
+| X-Content-Type-Options | Sunucu/CDN’de `nosniff`; HTML meta karşılığı yok. Pages’in gerçek yanıtını incelemeden mevcut olduğu iddia edilmez. |
+| Permissions-Policy | Sunucu/CDN’de örneğin `camera=(), microphone=(), geolocation=()`; sitede bu özellikler kullanılmıyor. |
+
+Başlangıç CSP taslağı: `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'`. Bu bir **taslaktır**, etkin başlık değildir. JSON-LD ve tarayıcı davranışını kontrol edip gerekiyorsa tam içerik hash’i kullanın; sırf kolaylık için unsafe-inline eklemeyin. Meta CSP sınırlı direktifler için kullanılabilir ancak `frame-ancestors`, report-only ve raporlama yeteneklerinin yerini tutmaz. [MDN CSP rehberi](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP), [frame-ancestors sınırı](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).
+
+## Marka görselleri
+
+`assets/og-image.png` 1200×630 paylaşım görselidir. OX markası için `favicon.ico`, `assets/favicon.svg`, `assets/apple-touch-icon.png` (180), `assets/icon-192.png`, `assets/icon-512.png` ve `site.webmanifest` eklidir. Manifest yalnız site kimliği/görünümü sağlar; service worker veya çevrimdışı çalışan uygulama iddiası yoktur. Gerçek mobil marka dosyaları verilirse türevleri birlikte yenileyin.

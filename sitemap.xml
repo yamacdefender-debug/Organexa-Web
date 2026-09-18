@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://organexa.com.tr/</loc></url><url><loc>https://organexa.com.tr/privacy/</loc></url><url><loc>https://organexa.com.tr/terms/</loc></url><url><loc>https://organexa.com.tr/contact/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://organexa.com.tr/</loc></url>
+  <url><loc>https://organexa.com.tr/for-pianists/</loc></url>
+  <url><loc>https://organexa.com.tr/for-djs/</loc></url>
+  <url><loc>https://organexa.com.tr/for-event-companies/</loc></url>
+  <url><loc>https://organexa.com.tr/event-management/</loc></url>
+  <url><loc>https://organexa.com.tr/customer-management/</loc></url>
+  <url><loc>https://organexa.com.tr/payment-tracking/</loc></url>
+  <url><loc>https://organexa.com.tr/whatsapp-reminders/</loc></url>
+  <url><loc>https://organexa.com.tr/backup-and-restore/</loc></url>
+  <url><loc>https://organexa.com.tr/features/</loc></url>
+  <url><loc>https://organexa.com.tr/privacy/</loc></url>
+  <url><loc>https://organexa.com.tr/terms/</loc></url>
+  <url><loc>https://organexa.com.tr/contact/</loc></url>
+</urlset>
