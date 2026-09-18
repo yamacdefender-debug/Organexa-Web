@@ -40,8 +40,9 @@ Lighthouse skoru saha Core Web Vitals ölçümü veya tam WCAG denetimi değildi
 - [x] Apex ve www için sertifika onaylı; **Enforce HTTPS etkinleştirildi**.
 - [x] `http://organexa.com.tr/` → 301 `https://organexa.com.tr/`.
 - [x] `https://www.organexa.com.tr/` → 301 `https://organexa.com.tr/`.
-- [x] `https://organexa.com.tr/` → 200 (milestone öncesi sürüm; yeni içerik push sonrası doğrulanır).
-- [ ] Yeni içerik yayımlandıktan sonra tüm sitemap URL’lerini, slash yönlendirmesini ve bilinmeyen yolun gerçek 404 durumunu doğrula.
+- [x] `https://organexa.com.tr/` → 200; yeni ana sayfa başlığı ve canonical doğrulandı.
+- [x] Yeni sürümde 13 sitemap içerik URL’sinin tamamı HTTPS 200 ve doğru self-canonical; sitemap.xml ve robots.txt 200.
+- [x] `/features` → 301 `/features/`; bilinmeyen test yolu gerçek HTTP 404 ve markalı hata içeriği döndürüyor.
 
 ## Hesap / ürün sahibinde kalan yayın işleri
 
@@ -54,3 +55,18 @@ Lighthouse skoru saha Core Web Vitals ölçümü veya tam WCAG denetimi değildi
 - [ ] Gelecekteki gerçek ürün davranışı / içerik değişikliklerinde metadata, schema, sitemap ve keyword map’i birlikte güncelle.
 
 SEO hazırlığı, Google’ın indekslediği veya belirli aramalarda sıralama verdiği anlamına gelmez. Schema sözdiziminin geçmesi de uygulama zengin sonucu uygunluğu değildir; fiyat/yorum uydurulmamıştır.
+
+## Canlı HTTPS Lighthouse ölçümü
+
+Aynı cihazda Lighthouse 12.8.2 / Chrome headless / varsayılan mobil benzetimi, 18 Eylül 2026; içerik commit’i `d77b95d3c489d37f2637dae695c9e222e562f3a7` yayımlandıktan sonra:
+
+| Sayfa | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| https://organexa.com.tr/ | 68 | 100 | 100 | 100 | 5,9 s | 0 | 170 ms |
+| https://organexa.com.tr/payment-tracking/ | 71 | 100 | 100 | 100 | 5,8 s | 0 | 50 ms |
+
+Canlı HTTPS ölçümlerinde de Kaspersky’nin harici script/CSS enjeksiyonu ağ kayıtlarında bulunuyor. Performance 95+ hedefi **doğrulanamadı**; bu sonuçlar temiz istemcideki gerçek site performansı olarak sunulamaz. Yerel ana sayfanın siteye ait HTML, CSS, JS ve logo toplam ham aktarım büyüklüğü yaklaşık 31,8 KB’dır. Enjekte kaynaklar repoda yoktur. Temiz ortamda yeni bir saha/laboratuvar ölçümü gerekir; güvenlik yazılımı devre dışı bırakılmamıştır.
+
+Bağımsız Google PageSpeed Insights API ölçümü de denendi; API `429 quota exceeded` döndürdüğü için bir skor üretmedi. Eksik ölçüm PASS olarak işaretlenmez. Ham canlı raporlar yerelde `.qa/lighthouse-production.json` ve `.qa/lighthouse-payment-production.json`; ağ kayıtları ortama özel parametreler içerdiğinden Git’e eklenmez.
+
+HTTP ve www yönlendirmeleri, geçerli HTTPS erişimi ve gerçek 404 ağ yanıtları Node fetch ile sertifika doğrulaması korunarak kontrol edildi. Google Search Console hesabına giriş, domain TXT doğrulaması veya sitemap gönderimi yapılmadı.
