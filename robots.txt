@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://organexa.com.tr/sitemap.xml
