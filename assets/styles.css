@@ -56,3 +56,11 @@ h1,h2,h3{overflow-wrap:anywhere}
 .contact-details p+p{margin-top:10px}
 .contact-details .contact-email{margin-top:24px;min-height:48px;max-width:100%}
 .contact-card>div{min-width:0}
+.footer-meta{display:flex;flex-direction:column;gap:12px;min-width:150px;font-size:.78rem;color:var(--muted)}
+.footer-phone a{color:var(--gold);white-space:nowrap}
+.visitor-count{display:flex;flex-direction:column;border-left:1px solid var(--gold);padding-left:14px;line-height:1.3}
+.visitor-count[hidden]{display:none}
+.visitor-value{font-size:1.35rem;color:var(--gold);font-variant-numeric:tabular-nums}
+.visitor-label{font-size:.7rem;letter-spacing:.06em}
+.cta-phone{margin-top:20px;color:var(--muted)}
+.cta-phone a{color:var(--gold);text-decoration:underline;text-underline-offset:4px}
