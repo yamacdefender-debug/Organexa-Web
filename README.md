@@ -57,12 +57,29 @@ Politika, ürün sahibinin sağladığı veri akışı gereksinimlerine göre ha
 
 Kaynak: [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy), [Drive uygulama veri alanı](https://developers.google.com/workspace/drive/api/guides/appdata).
 
+## İletişim ve GoatCounter
+
+Resmi telefon **0543 461 5884** (`tel:+905434615884`), e-posta `izzetors42@gmail.com` adresidir. Telefonun görünen biçimi ve URI'si `assets/config.js` içindeki `contactPhone` alanından gelir. İletişim sayfasında JavaScript kapalıyken de çalışan telefon bağlantısı vardır; bu statik yedeği numara değişince güncelleyin. Footer ve DJ sayfası telefon bağlantıları JavaScript ile oluşturulur.
+
+GoatCounter aktivasyonu:
+
+1. [GoatCounter](https://www.goatcounter.com/) üzerinde site oluşturun ve public site code değerini alın.
+2. `assets/config.js` içindeki `goatcounterCode: ""` değerine yalnızca bu code'u yazın. Yönetici erişim token'ı veya gizli anahtar eklemeyin.
+3. GoatCounter site ayarlarında **Allow adding visitor counts on your website** seçeneğini açın.
+4. Deploy edin; ana sayfa ve `/for-djs/` dahil tüm HTML sayfalarını kontrol edin.
+
+Site code boşsa analytics script'i ve toplam ziyaret isteği çalışmaz; footer'daki gösterge gizli kalır. Kod ayarlandığında `/assets/site.js` her sayfada GoatCounter `count.js` dosyasını bir kez yükler. Sayfalar SPA değildir, dolayısıyla her HTML yüklemesi tek otomatik pageview gönderir; ek route sayımı yoktur. Footer gerçek toplamı `https://<code>.goatcounter.com/counter/TOTAL.json` yanıtından alır. Bu endpoint erişilemezse, yanıt geçersizse veya public counter ayarı kapalıysa gösterge gizli kalır. GoatCounter toplam yanıtını önbelleğe alabilir; gösterge anlık olmayabilir. Yerel `localhost` ve `127.0.0.1` önizlemelerinde analytics ve sayaç istekleri yapılmaz.
+
 ## Destek e-postasını değiştirme
 
-`assets/config.js` içindeki tek ayarı değiştirin:
+`assets/config.js` içindeki `supportEmail` alanını değiştirin:
 
 ```js
-window.ORGANEXA_CONFIG = Object.freeze({ supportEmail: "izzetors42@gmail.com" });
+window.ORGANEXA_CONFIG = Object.freeze({
+  supportEmail: "izzetors42@gmail.com",
+  contactPhone: Object.freeze({ display: "0543 461 5884", uri: "tel:+905434615884" }),
+  goatcounterCode: ""
+});
 ```
 
 Public adres `izzetors42@gmail.com` olarak ayarlanmıştır. JavaScript yalnız `[data-support-email]` bağlantılarının adresini günceller; CTA metnini korur. Bağlantılar statik HTML içinde de bulunduğundan JavaScript kapalıyken e-posta ve buton çalışır. Adres değişirse config ile birlikte `contact/index.html`, `privacy/index.html`, `terms/index.html` içindeki mailto/görünen adresleri, OAuth bilgilerini ve ilgili belgeleri güncelleyin. Config içine gizli anahtar veya token koymayın; tüm dosyalar herkese açıktır. Site mevcut dark/gold tasarımını sistemin açık ve koyu renk tercihlerinde korur; ayrı bir açık tema anahtarı yoktur.
@@ -77,7 +94,7 @@ contact/index.html  İletişim
 404.html            Bulunamayan sayfa
 assets/styles.css   Responsive marka tasarımı
 assets/site.js      Mobil menü ve destek bağlantısı
-assets/config.js    Public destek adresi
+assets/config.js    Public iletişim bilgileri ve GoatCounter site code
 assets/favicon.svg OX monogramı
 assets/og-image.png Sosyal paylaşım görseli (1200 × 630)
 robots.txt
@@ -86,7 +103,7 @@ CNAME
 .nojekyll
 ```
 
-Harici font, izleme, çerez, kütüphane veya üçüncü taraf istemci isteği yoktur. Sistem fontları, yerel SVG ve küçük PNG kullanılır. OX monogramı ve telefon içindeki HTML/CSS tasviri, verilen lacivert/altın marka yönlendirmesine göre bu repo için hazırlanmıştır; mobil uygulamanın özgün logo dosyası veya ekran görüntüsü sağlanmamıştır. Önizleme temsili olarak etiketlenmiştir; gerçek müşteri verisi içermez. CTA’lar çalışan sayfa/bölüm bağlantılarıdır; sahte mağaza bağlantısı yoktur.
+Harici font veya uygulama kütüphanesi yoktur. GoatCounter yapılandırıldığında üçüncü taraf analytics istekleri yapılır; entegrasyon tarayıcı çerezi kullanmaz. Sistem fontları, yerel SVG ve küçük PNG kullanılır. OX monogramı ve telefon içindeki HTML/CSS tasviri, verilen lacivert/altın marka yönlendirmesine göre bu repo için hazırlanmıştır; mobil uygulamanın özgün logo dosyası veya ekran görüntüsü sağlanmamıştır. Önizleme temsili olarak etiketlenmiştir; gerçek müşteri verisi içermez. CTA’lar çalışan sayfa/bölüm bağlantılarıdır; sahte mağaza bağlantısı yoktur.
 
 ## Yayın kontrolü
 
