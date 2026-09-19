@@ -59,7 +59,7 @@ Kaynak: [Google API Services User Data Policy](https://developers.google.com/ter
 
 ## İletişim ve GoatCounter
 
-Resmi telefon **0543 461 5884** (`tel:+905434615884`), e-posta `izzetors42@gmail.com` adresidir. Telefonun görünen biçimi ve URI'si `assets/config.js` içindeki `contactPhone` alanından gelir. İletişim sayfasında JavaScript kapalıyken de çalışan telefon bağlantısı vardır; bu statik yedeği numara değişince güncelleyin. Footer ve DJ sayfası telefon bağlantıları JavaScript ile oluşturulur.
+Resmi telefon **0543 461 5884** (`tel:+905434615884`), e-posta `izzetors42@gmail.com` adresidir. Telefonun görünen biçimi ve URI'si `assets/config.js` içindeki `contactPhone` alanından gelir. İletişim sayfası, footer ve DJ CTA içinde JavaScript kapalıyken de çalışan telefon bağlantıları vardır; numara değişince bu statik yedekleri de güncelleyin.
 
 GoatCounter aktivasyonu:
 

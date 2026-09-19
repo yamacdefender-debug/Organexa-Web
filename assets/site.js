@@ -30,10 +30,10 @@
       link.textContent = phone.display;
     });
     document.querySelectorAll('[data-phone-slot]').forEach(slot => {
-      const link = document.createElement('a');
+      const link = slot.querySelector('a') || document.createElement('a');
       link.href = phone.uri;
       link.textContent = phone.display;
-      slot.appendChild(link);
+      if (!link.isConnected) slot.appendChild(link);
     });
   }
 

@@ -6,7 +6,11 @@ const source = fs.readFileSync('assets/site.js', 'utf8');
 const run = async (code, hostname, fetchImpl) => {
   const scripts = [];
   const phoneLinks = [{ classList: { contains: () => false } }];
-  const slots = [{ appendChild(link) { this.link = link; } }];
+  const slots = [{
+    link: { isConnected: true },
+    querySelector() { return this.link; },
+    appendChild(link) { this.link = link; }
+  }];
   const value = { textContent: '' };
   const counter = { hidden: true, querySelector: () => value };
   const toggle = { hidden: true, setAttribute() {}, addEventListener() {}, getAttribute: () => 'false' };
